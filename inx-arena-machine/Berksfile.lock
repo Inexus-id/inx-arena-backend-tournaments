@@ -1,0 +1,7 @@
+DEPENDENCIES
+  inx-arena
+    path: .
+    metadata: true
+
+GRAPH
+  inx-arena (0.1.0)

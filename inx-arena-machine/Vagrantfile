@@ -1,0 +1,30 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+Vagrant.require_version ">= 1.5.0"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.hostname = "inx-arena-berkshelf"
+  config.omnibus.chef_version = :latest
+  config.vm.box = "chef/ubuntu-14.04"
+  config.berkshelf.enabled = true
+  config.vm.provider :lxc do |lxc, override|
+    lxc.customize 'cgroup.memory.limit_in_bytes', '2048M'
+    override.vm.box = "fgrehm/trusty64-lxc"
+  end
+
+  config.vm.provision :chef_solo do |chef|
+    chef.json = {
+      mysql: {
+        server_root_password: 'rootpass',
+        server_debian_password: 'debpass',
+        server_repl_password: 'replpass'
+      }
+    }
+
+    chef.run_list = [
+      "recipe[inx-arena::default]"
+    ]
+  end
+end
