@@ -9,11 +9,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.omnibus.chef_version = :latest
   config.vm.box = "chef/ubuntu-14.04"
   config.berkshelf.enabled = true
+  config.vm.synced_folder "../", "/home/vagrant/projects"
   config.vm.provider :lxc do |lxc, override|
     lxc.customize 'cgroup.memory.limit_in_bytes', '2048M'
     override.vm.box = "fgrehm/trusty64-lxc"
   end
 
+  config.vm.provider :virtualbox do |vb, override|
+    override.vm.box = "ubuntu/trusty64"
+  end
   config.vm.provision :chef_solo do |chef|
     chef.json = {
       mysql: {

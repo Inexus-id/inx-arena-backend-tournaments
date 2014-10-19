@@ -1,1 +1,0 @@
-{"lxc":{"/vagrant":{"guestpath":"/vagrant","hostpath":"/home/bita/code/inx-arena-backend-tournaments/recipe/inx-arena","disabled":false},"v-csc-1":{"id":"v-csc-1","guestpath":"/tmp/vagrant-chef-4/chef-solo-1/cookbooks","hostpath":"/home/bita/.berkshelf/default/vagrant/berkshelf-20141019-8152-1byp5c1-default","disabled":false}}}
