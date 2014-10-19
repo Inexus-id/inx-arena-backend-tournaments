@@ -1,8 +1,6 @@
-#
-# Cookbook Name:: inx-arena
-# Recipe:: default
-#
-# Copyright (C) 2014 YOUR_NAME
-#
-# All rights reserved - Do Not Redistribute
-#
+include_recipe 'apt'
+node['inx-arena-packages'].each do |pkg|
+  package pkg
+end
+
+include_recipe 'rvm::user'
