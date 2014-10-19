@@ -122,7 +122,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 end
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "quantal64"
+  config.vm.box = "ubuntu/trusty64"
   config.vm.provider :lxc do |lxc|
     # Same effect as 'customize ["modifyvm", :id, "--memory", "1024"]' for VirtualBox
     lxc.customize 'cgroup.memory.limit_in_bytes', '2048M'
