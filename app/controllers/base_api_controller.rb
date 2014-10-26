@@ -13,15 +13,15 @@ module Api
     end
 
     def resource(email)
-      @resource =|| User.where(email: email).first
+      @resource =|| User.find_by(email: email)
     end
 
     def valid_resources?(email, password)
-      @resource.present? && @resource.valid_password?(password)
+      @resource.try(:valid_password?, password)
     end
 
     def set_locale
-      I18n.locale = 'en' #all the api calls sould use 'en' locales.
+      I18n.locale = :en #all the api calls sould use 'en' locales.
     end
   end
 end

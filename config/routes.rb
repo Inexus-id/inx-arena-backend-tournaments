@@ -3,5 +3,7 @@ Rails.application.routes.draw do
   devise_for :admins
   root to: "home#index"
 
-  get "sessions/login"
+  namespace :api do
+    get "sessions/login"
+  end
 end
