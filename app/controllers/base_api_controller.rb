@@ -1,23 +1,16 @@
 module Api
   class BaseApiController < ApplicationController
     respond_to :json
-    before_filter :restrict_access # you can use @resource in the others controllers.
-    skip_before_filter :authenticate_user! #skip devise auth in all api calls.
+    before_filter :check_auth
 
-    private
 
-    def restrict_access
-      authenticate_or_request_with_http_basic do |email, password|
-        valid_resources?(email, password)
+    def check_auth
+      authenticate_or_request_with_http_basic do |username, password|
+        @resource = User.find_by_email(username)
+        if @resource.valid_password?(password)
+          sign_in :user, @resource
+        end
       end
-    end
-
-    def resource(email)
-      @resource =|| User.find_by(email: email)
-    end
-
-    def valid_resources?(email, password)
-      @resource.try(:valid_password?, password)
     end
 
     def set_locale
